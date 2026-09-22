@@ -82,6 +82,7 @@
   /* plan B */
   .planb { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
   .pb { border-left:3px solid var(--warm); padding:6px 10px; break-inside:avoid; } .pb b { display:block; margin-bottom:2px; } .pb p { margin:0; font-size:9.2pt; }
+  details.pb summary { cursor:pointer; } details.pb summary::marker { color:var(--warm); } details.pb p { margin-top:6px; }
 
   /* onsen */
   .onsen-box { display:grid; grid-template-columns:1.1fr 1fr 1fr; gap:10px; align-items:stretch; }
@@ -178,20 +179,30 @@
 
 <div class="days">
   <div class="day"><div class="d">DAY 1 · 9/24 목</div><div class="t">도착 · 센소지 · 스카이트리 · 온천</div>
-    <ul><li>12:20 아사쿠사 도착</li><li>12:50 텐동 점심</li><li>14:00 센소지</li><li>17:00 스카이트리 일몰</li><li>20:00 몬자야키(예약)</li><li>22:00 마츠리유 온천</li></ul></div>
+    <ul><li>12:20 아사쿠사 도착</li><li>12:50 텐동 점심</li><li>14:00 센소지</li><li>16:00 스미다 수족관</li><li>17:00 스카이트리 일몰</li><li>20:00 몬자야키(코시로 예약)</li><li>22:00 마츠리유 온천</li></ul></div>
   <div class="day free"><div class="d">DAY 2 · 9/25 금</div><div class="t">별도 일정</div><ul><li>이 문서에서 제외</li><li>저녁이 비면 온천을 이 날로 옮겨도 됨</li></ul></div>
   <div class="day"><div class="d">DAY 3 · 9/26 토</div><div class="t">아침 센소지 · 갓파바시 · 우에노 · 귀국</div>
     <ul><li>07:00 센소지</li><li>09:00 페리칸 카페</li><li>10:15 갓파바시</li><li>12:20 우에노 돈카츠</li><li>13:30 아메요코</li><li>15:50 공항행 열차</li></ul></div>
 </div>
 
-<nav class="jump"><a href="#top">처음</a><a href="#prep">준비·eSIM</a><a class="red" href="#day1">9/24</a><a class="red" href="#day3">9/26</a><a href="#planb">플랜 B</a><a href="#onsen">온천</a><a href="#guide">명소·먹거리</a><a href="#budget">예산</a></nav>
+<div class="esim" id="hotel"><b class="h">숙소: 호텔 타비노스 아사쿠사 (HOTEL TAVINOS Asakusa)</b>
+<ul>
+  <li><b>주소</b> 東京都台東区浅草2-18-8 (지상 13층). 아사쿠사역(츠쿠바 익스프레스 A1) 도보 4분, 아사쿠사역(긴자선 1번) 11분, 아사쿠사역(아사쿠사선 A4) 12분, 타와라마치역(긴자선 3번) 9분</li>
+  <li><b>체크인/아웃</b> 체크인 15:00~24:00(무인, 여권 스캔 자동 체크인), 체크아웃 11:00. 조기체크인·레이트체크아웃 1,100엔/시간(자리 있을 때만)</li>
+  <li><b>객실</b> 할리우드 트윈·더블·유니버설(배리어프리) 3종, 타이야키·솜사탕·물풍선 3가지 축제 콘셉트 디자인</li>
+  <li><b>편의시설</b> 전객실 무료 와이파이, 셀프 코인 세탁건조기(세제 자동 투입, 별도 세탁 서비스는 없음), 셀프 클록룸 짐 보관, 프런트 24시간 상주, 프런트에서 스킨케어 세트 350엔 구매 가능, 오리지널 숙박 스탬프</li>
+  <li><b>없는 것</b> 조식·온천(대욕장)·라운지 — 그래서 아침은 페리칸 카페, 목욕은 근처 온천(마츠리유/사카에유)으로 일정을 짬</li>
+  <li><b>기타</b> 전관 금연, 반려동물 불가(보조견 제외)</li>
+</ul></div>
+
+<nav class="jump"><a href="#top">처음</a><a href="#hotel">숙소</a><a href="#prep">준비·eSIM</a><a class="red" href="#day1">9/24</a><a class="red" href="#day3">9/26</a><a href="#planb">플랜 B</a><a href="#onsen">온천</a><a href="#guide">명소·먹거리</a><a href="#budget">예산</a><a href="#phrases">일본어</a></nav>
 <section id="prep">
 <h2><span class="num">0</span><span class="jp">準備</span>출발 전 준비<span class="tag">D-7부터 출발 당일까지</span></h2>
 <div class="prep">
-  <div class="pp"><div class="w">D-7</div><b>eSIM 구매</b><p>3일짜리 일본 eSIM. 아래 상자 참고. 스카이트리 17:00 입장권 예매도 이때.</p></div>
-  <div class="pp"><div class="w">D-3</div><b>Visit Japan Web</b><p>입국심사·세관 QR 발급. 몬자야키 가게 위치 확인(아사쿠사 안인지).</p></div>
+  <div class="pp"><div class="w">D-7</div><b>eSIM 구매 <span class="note">완료</span></b><p>3일짜리 일본 eSIM 구매 완료. 스카이트리 17:00 입장권도 예매 완료.</p></div>
+  <div class="pp"><div class="w">D-3</div><b>Visit Japan Web</b><p>입국심사·세관 QR 발급. 몬자야키는 코시로가 예약(위치는 추후 전달받는 대로 확정).</p></div>
   <div class="pp"><div class="w">D-1</div><b>eSIM 설치 · 짐</b><p>집 와이파이에서 eSIM QR 설치만 하고 켜지는 않기. 환전은 소액만(Suica·카드로 대부분 해결).</p></div>
-  <div class="pp"><div class="w">D-day 04:30</div><b>인천공항</b><p>07:10 출발이라 05:10 카운터. 새벽 공항버스·택시 예약.</p></div>
+  <div class="pp"><div class="w">D-day 04:30</div><b>인천공항</b><p>07:10 출발이라 05:10 카운터. 주차장은 예약이 안 되고(만차), 발렛도 큰 의미 없어 공용 주차장에 바로 대는 걸로. 여유 있게 출발.</p></div>
   <div class="pp"><div class="w">착륙 직후</div><b>eSIM 켜기</b><p>비행기 모드 해제 전에 eSIM 회선 활성화 + 데이터 로밍 ON.</p></div>
 </div>
 <div class="esim"><b class="h">eSIM 이렇게 하면 됩니다 (갤럭시 플립 기준)</b>
@@ -205,10 +216,11 @@
 
 <section id="day1">
 <h2><span class="num">1</span><span class="jp">一日目</span>9/24 목<span class="tag">나리타 10:00 도착 → 센소지 → 스카이트리 → 몬자야키 → 온천</span></h2>
-<div class="strip">
+<div class="strip" style="grid-template-columns:repeat(5,1fr)">
   <figure><img loading="lazy" src="img/accessexpress.jpg" alt=""><figcaption><b>케이세이 액세스 특급</b> 나리타 → 아사쿠사 직통 55~70분</figcaption></figure>
   <figure><img loading="lazy" src="img/tendon.jpg" alt=""><figcaption><b>아사쿠사식 텐동</b> 진한 타레를 끼얹는 검은 텐동</figcaption></figure>
   <figure><img loading="lazy" src="img/sensoji.jpg" alt=""><figcaption><b>센소지 본당</b> 향로 연기를 몸에 쐬는 참배객들</figcaption></figure>
+  <figure><img loading="lazy" src="img/aquarium.jpg" alt=""><figcaption><b>스미다 수족관</b> 해파리 수조가 대표, 소라마치 5~6층</figcaption></figure>
   <figure><img loading="lazy" src="img/skytree.jpg" alt=""><figcaption><b>도쿄 스카이트리</b> 634m, 일몰 17:33에 맞춰 입장</figcaption></figure>
 </div>
 <div class="legend"><span class="move">이동</span><span class="spot">명소</span><span class="eat">식사</span><span class="onsen">온천</span><span class="net">통신</span></div>
@@ -226,13 +238,14 @@
 <tr class="spot"><td class="time">13:45</td><td class="what"><b>카미나리몬 → 나카미세도리</b><small>초롱 밑면의 용 조각 확인. 250m 상점가, 간식은 산 자리에서 먹기(걸으며 먹지 않기)</small></td><td class="alt none"></td></tr>
 <tr class="spot"><td class="time">14:10</td><td class="what"><b>호조몬 → 본당 참배 → 오미쿠지</b><small>본당 06:00~17:00. 향로 연기 쐬기 → 손 씻기 → 새전 → 두 번 절·박수 없이 합장(절이라 박수 안 함). 오미쿠지 100엔, 흉이 나오면 옆 철봉에 묶고 감</small></td><td class="alt">비가 오면 본당·호조몬 처마 아래로 짧게, 나머지는 밤 산책으로</td></tr>
 <tr class="spot"><td class="time">14:35</td><td class="what"><b>아사쿠사 신사 · 본당 뒤편</b><small>본당 오른쪽 옆. 관광객이 확 줄어드는 구역. 오층탑 사진은 본당 서쪽 정원에서</small></td><td class="alt none"></td></tr>
-<tr class="move"><td class="time">15:00</td><td class="what"><b>체크인 · 휴식</b><small>스카이트리 예매 QR·보조배터리 챙기기</small></td><td class="alt">피곤하면 16:30까지 늘리고 스미다 공원은 생략, 오시아게역까지 지하철 1정거장</td></tr>
-<tr class="spot"><td class="time">16:15</td><td class="what"><b>스미다 공원 → 아즈마바시</b><small>다리 위 서쪽 난간에서 스카이트리 + 아사히 빌딩 황금 오브제가 한 컷</small></td><td class="alt none"></td></tr>
-<tr class="spot"><td class="time">16:40</td><td class="what"><b>도쿄 스카이트리 4층 입장</b><small>10:00~22:00(최종 입장 21:00). 텐보데크 1,800~3,600엔 변동제. 예매 QR은 4층 전용 게이트</small></td><td class="alt">흐림·비 예보면 예매 취소하고 소라마치 쇼핑 + 스미다 수족관(소라마치 5~6층)으로 교체</td></tr>
+<tr class="move"><td class="time">15:00</td><td class="what"><b>체크인 · 휴식</b><small>스카이트리 예매 QR(예매 완료)·보조배터리 챙기기</small></td><td class="alt">피곤하면 16:00으로 늘리고 수족관 생략, 16:40 스카이트리부터 시작</td></tr>
+<tr class="spot"><td class="time">15:40</td><td class="what"><b>스미다 공원 → 아즈마바시</b><small>다리 위 서쪽 난간에서 스카이트리 + 아사히 빌딩 황금 오브제가 한 컷. 짧게 15분</small></td><td class="alt none"></td></tr>
+<tr class="spot"><td class="time">16:00</td><td class="what"><b>스미다 수족관</b><small>도쿄 소라마치 5~6층. 평일 10:00~20:00(최종입장 19:00). 대인 2,700엔. 도넛형 해파리 수조와 펭귄이 대표. 40~50분 관람</small></td><td class="alt">시간이 빠듯하면 펭귄·해파리만 보고 15분 컷으로 이동</td></tr>
+<tr class="spot"><td class="time">16:45</td><td class="what"><b>도쿄 스카이트리 4층 입장</b><small>10:00~22:00(최종 입장 21:00). 텐보데크 1,800~3,600엔 변동제. 예매 QR은 4층 전용 게이트</small></td><td class="alt">흐림·비 예보면 전망대만 취소하고 수족관 관람을 늘려서 시간 채우기</td></tr>
 <tr class="spot"><td class="time">17:00</td><td class="what"><b>텐보데크 350m</b><small>일몰 17:33. 서쪽(후지산 방향) 창가에 16:55까지 자리. 350m 층 카페에서 음료 들고 창가 스탠딩 가능</small></td><td class="alt">창가를 못 잡으면 18:00 이후 야경 시간대가 오히려 한산. 회랑(450m)은 추가 요금이라 생략</td></tr>
 <tr class="spot"><td class="time">18:20</td><td class="what"><b>하강 → 소라마치 1·2층 기념품</b><small>도쿄 바나나·시로이 코이비토·로이스 등 정석 선물. 스카이트리 한정 패키지는 여기만</small></td><td class="alt none"></td></tr>
 <tr class="move"><td class="time">19:15</td><td class="what"><b>아사쿠사로 도보 복귀</b><small>아즈마바시 경유 20분. 스카이트리 조명이 켜진 강변을 보며 걷는 코스</small></td><td class="alt">시간이 빠듯하면 오시아게역 → 아사쿠사역 아사쿠사선 1정거장(5분)</td></tr>
-<tr class="eat"><td class="time">19:45</td><td class="what"><b>몬자야키 가게 도착</b><small>20:00 예약. 명란 떡 치즈 몬자가 입문용. 철판에 둑을 만들고 국물을 붓는 건 점원에게 부탁하면 해 줌</small></td><td class="alt">가게가 츠키시마(몬자 거리)라면 스카이트리에서 18:40에 내려와 오시아게 → 한조몬선 → 오에도선 30분</td></tr>
+<tr class="eat"><td class="time">19:45</td><td class="what"><b>몬자야키 가게 도착</b><small>20:00, 코시로가 예약(가게 위치는 추후 전달받는 대로 확정). 명란 떡 치즈 몬자가 입문용. 철판에 둑을 만들고 국물을 붓는 건 점원에게 부탁하면 해 줌</small></td><td class="alt">가게가 츠키시마(몬자 거리)라면 스카이트리에서 18:40에 내려와 오시아게 → 한조몬선 → 오에도선 30분</td></tr>
 <tr class="spot"><td class="time">21:30</td><td class="what"><b>센소지 야간 산책</b><small>조명 일몰~23:00. 카미나리몬 → 나카미세(셔터 벽화) → 호조몬 → 오층탑. 30분이면 충분</small></td><td class="alt none"></td></tr>
 <tr class="onsen"><td class="time">22:00</td><td class="what"><b>아사쿠사 ROX 마츠리유</b><small>ROX 빌딩 7층, 센소지에서 5분. 월~토 10:30~다음날 09:00. 옥상 노천탕에서 스카이트리가 보임. 수건·실내복 포함</small></td><td class="alt">너무 늦었으면 3일차 07:40에 가도 됨(대욕장 08:00까지). 천연온천이 좋으면 사카에유(온천 항목)</td></tr>
 <tr class="move"><td class="time">23:30</td><td class="what"><b>숙소 복귀</b><small>3일차 07:00 기상 알람</small></td><td class="alt none"></td></tr>
@@ -277,7 +290,7 @@
 <section id="planb">
 <h2><span class="num">B</span><span class="jp">予備案</span>상황별 플랜 B</h2>
 <div class="planb">
-  <div class="pb"><b>비가 오는 날</b><p>1일차: 스카이트리 대신 소라마치 + 스미다 수족관, 저녁 후 온천은 그대로. 3일차: 갓파바시 대신 우에노 박물관, 아메요코는 아케이드가 있어 비에 강함. 우산은 편의점 500엔.</p></div>
+  <div class="pb"><b>비가 오는 날</b><p>1일차: 스카이트리 전망대만 취소하고 수족관·소라마치 쇼핑으로 시간을 채움, 저녁 후 온천은 그대로. 3일차: 갓파바시 대신 우에노 박물관, 아메요코는 아케이드가 있어 비에 강함. 우산은 편의점 500엔.</p></div>
   <div class="pb"><b>항공편 지연으로 12시 넘어 도착</b><p>텐동 점심을 빼고 나카미세 간식으로 때운 뒤 센소지 → 체크인 → 스카이트리 순서 유지. 17:00 예매는 18:00으로 변경 가능하면 변경, 안 되면 야경만.</p></div>
   <div class="pb"><b>스카이트리가 흐림·안개</b><p>전망대는 과감히 포기. 대신 아사쿠사 문화관광센터 8층 무료 전망 테라스(카미나리몬 맞은편, 21:00까지)에서 센소지·스카이트리 야경. 0엔.</p></div>
   <div class="pb"><b>맛집 줄이 너무 길 때</b><p>텐동 → 별관 → 아사쿠사 멘치. 돈카츠 → 톤하치테이 → 아메요코 해산물 덮밥. 페리칸 → 빵만 사서 공원. 30분 넘게 기다리지 않는 걸 원칙으로.</p></div>
@@ -314,6 +327,7 @@
   <div class="g"><img loading="lazy" src="img/tendon.jpg" alt=""><div><b>다이코쿠야 텐동</b><span class="why">1887년 창업, 검은 텐동</span><p>참기름에 튀겨 진한 간장 타레를 끼얹는 아사쿠사식. 겉이 까맣고 달짝지근함. 에비텐동이 대표, 현금만 받는 경우가 있어 준비.</p></div></div>
   <div class="g"><img loading="lazy" src="img/monja.jpg" alt=""><div><b>몬자야키</b><span class="why">도쿄 시타마치의 소울푸드</span><p>오코노미야키보다 반죽이 묽어 철판에 펼쳐 익히고 작은 주걱으로 긁어 먹음. 명란 떡 치즈 조합이 입문용. 사진은 굽기 전 재료 상태.</p></div></div>
   <div class="g"><img loading="lazy" src="img/skytree.jpg" alt=""><div><b>도쿄 스카이트리</b><span class="why">634m, 일본 최고 높이 구조물</span><p>텐보데크 350m가 기본, 회랑 450m는 추가 요금. 일몰 30분 전 입장이 최적. 예매 없이 가면 비싸고 줄이 김.</p></div></div>
+  <div class="g"><img loading="lazy" src="img/aquarium.jpg" alt=""><div><b>스미다 수족관</b><span class="why">소라마치 5~6층, 날씨 영향 없는 실내</span><p>도넛형 해파리 수조와 펭귄 전시가 대표. 평일 10:00~20:00(최종입장 19:00), 대인 2,700엔. 스카이트리 바로 옆이라 일몰 전 시간 채우기 좋음.</p></div></div>
   <div class="g"><img loading="lazy" src="img/kappabashi.jpg" alt=""><div><b>갓파바시 도구거리</b><span class="why">요리 도구 전문 상점가 800m</span><p>식당용 칼·그릇·냄비를 소매로. 식품 모형 키링이 기념품으로 인기. 칼은 반드시 위탁수하물.</p></div></div>
   <div class="g"><img loading="lazy" src="img/shinobazu.jpg" alt=""><div><b>우에노 돈카츠 · 시노바즈 연못</b><span class="why">돈카츠 발상지로 불리는 동네</span><p>이센(카츠산도 원조), 호라이야(히레카츠), 톤하치테이. "젓가락으로 잘리는 돈카츠"가 우에노 스타일. 식후 연못 산책.</p></div></div>
   <div class="g"><img loading="lazy" src="img/ameyoko.jpg" alt=""><div><b>아메요코</b><span class="why">전후 암시장에서 시작한 400여 점포</span><p>과자 도매 니키노카시, 건어물·과일 컷, 화장품·운동화 할인. 연말이 절정이지만 평소 토요일도 활기.</p></div></div>
@@ -330,26 +344,17 @@
 <tbody>
 <tr><td>공항 왕복</td><td>액세스 특급 나리타↔아사쿠사</td><td class="r">약 2,600</td></tr>
 <tr><td>시내 교통</td><td>긴자선·아사쿠사선 6~8회</td><td class="r">약 1,500</td></tr>
-<tr><td>스카이트리</td><td>텐보데크, 변동제</td><td class="r">1,800~3,600</td></tr>
+<tr><td>스카이트리</td><td>텐보데크, 변동제(예매 완료)</td><td class="r">1,800~3,600</td></tr>
+<tr><td>스미다 수족관</td><td>대인 1매</td><td class="r">2,700</td></tr>
 <tr><td>식사</td><td>텐동 2,000 · 몬자 2,500 · 돈카츠 2,500 · 페리칸 1,200</td><td class="r">약 8,000</td></tr>
 <tr><td>간식·카페</td><td>나카미세 간식, 커피, 편의점</td><td class="r">약 2,000</td></tr>
 <tr><td>온천</td><td>마츠리유(요금 공식 확인) 또는 사카에유(센토 요금)</td><td class="r">600~3,000</td></tr>
-<tr><td>합계</td><td>쇼핑 제외</td><td class="r"><b>약 17,000~21,000</b></td></tr>
+<tr><td>합계</td><td>쇼핑·숙박비·인천공항 주차 제외</td><td class="r"><b>약 19,000~23,000</b></td></tr>
 </tbody>
 </table>
 <div>
-<table class="phr">
-<thead><tr><th>한마디</th><th>일본어</th></tr></thead>
-<tbody>
-<tr><td>짐 맡겨도 될까요</td><td>荷物を預かってもらえますか</td></tr>
-<tr><td>예약한 ○○입니다</td><td>予約した○○です</td></tr>
-<tr><td>추천 메뉴는요</td><td>おすすめは何ですか</td></tr>
-<tr><td>포장 되나요</td><td>持ち帰りできますか</td></tr>
-<tr><td>면세 되나요</td><td>免税できますか</td></tr>
-<tr><td>나리타 공항 가나요</td><td>この電車は成田空港に行きますか</td></tr>
-</tbody>
-</table>
 <p class="note">긴급: 경찰 110 · 구급 119 · 영사콜센터 +82-2-3210-0404(24시간)</p>
+<p class="note">일본어 한마디 모음은 맨 아래 §를 참고.</p>
 </div>
 </div>
 </section>
@@ -357,10 +362,11 @@
 <section class="keep">
 <h2><span class="num">✓</span><span class="jp">持ち物</span>출발 전 챙길 것</h2>
 <ul class="tips">
-  <li><b>eSIM</b>: D-7 구매, D-1 설치, 착륙 직후 켜기. 기존 유심 데이터는 끄기.</li>
+  <li><b>eSIM</b>: 구매 완료. D-1 설치, 착륙 직후 켜기. 기존 유심 데이터는 끄기.</li>
   <li><b>Visit Japan Web</b> 입국·세관 QR 등록 후 화면 캡처.</li>
-  <li><b>스카이트리 17:00 입장권</b> 공식 사이트 예매. 날씨가 나쁘면 전날까지 변경·취소.</li>
-  <li><b>몬자야키 20:00 예약</b> 가게 주소 확인. 츠키시마면 플랜 B 마지막 항목대로.</li>
+  <li><b>스카이트리 17:00 입장권</b> 예매 완료. QR 화면 캡처해두기. 날씨가 나쁘면 전날까지 변경·취소.</li>
+  <li><b>몬자야키 20:00</b> 코시로가 예약. 가게 위치는 전달받는 대로 다시 확인(츠키시마면 플랜 B 마지막 항목대로).</li>
+  <li><b>인천공항 주차</b>: 주차장 사전예약 불가(만차), 발렛도 실효성 낮아 그냥 공용 주차장 이용. 여유 있게 도착.</li>
   <li><b>구글맵 오프라인 지도</b> 도쿄 동부 다운로드. 데이터 없이도 길 찾기.</li>
   <li><b>현금</b> 1~2만 엔. 텐동·나카미세·센토는 현금 비중이 높음. 나머지는 Suica·카드.</li>
   <li><b>귀국 짐</b>: 칼·액체·과자는 위탁. 에어부산 위탁 무게 한도는 예약 조건 확인.</li>
@@ -375,8 +381,64 @@
   <li><a href="http://www.tempura.co.jp/access.html">다이코쿠야 텐푸라</a> · <a href="https://asakusa.pelicancafe.jp/">페리칸 카페 아사쿠사점</a> · <a href="https://rurubu.jp/andmore/article/20254">나카미세 먹거리(루루부)</a></li>
   <li><a href="https://www.matsuri-yu.com/en/charge/">아사쿠사 ROX 마츠리유</a> · <a href="https://www.sakaeyu.net/information/">유돈부리 사카에유 영업 안내</a></li>
   <li><a href="https://www.kappabashi.or.jp/en/qa/">갓파바시 도구거리</a> · <a href="https://www.ameyoko.net/">아메요코 공식</a> · <a href="https://serai.jp/gourmet/1146563">우에노 돈카츠 노포</a></li>
+  <li><a href="https://www.sumida-aquarium.com/">스미다 수족관 공식(영업시간·요금)</a> · <a href="https://hoteltavinos.com/en/asakusa/">호텔 타비노스 아사쿠사 공식</a></li>
 </ul>
-<p class="credits">사진: 위키미디어 커먼즈(각 파일 페이지의 CC 라이선스 표기에 따름) — <a href="https://commons.wikimedia.org/wiki/File:Keisei_Type3000-3026.jpg">Keisei_Type3000-3026.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Ueno_20241210_133139.jpg">Ueno_20241210_133139.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Asakusa_shrine_2012.JPG">Asakusa_shrine_2012.JPG</a> · <a href="https://commons.wikimedia.org/wiki/File:Day2-2_%2840909714314%29.jpg">Day2-2_(40909714314).jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Kappabashi-dori_streetcorner_%28Kitchen_town_-_southern_end%29_Tokyo_Japan.jpg">Kappabashi-dori_streetcorner_(Kitchen_town_-_southern_end)_Tokyo_Japan.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Monjayaki_Before.JPG">Monjayaki_Before.JPG</a> · <a href="https://commons.wikimedia.org/wiki/File:Asakusa_Nakamise_2021-12_ac.jpg">Asakusa_Nakamise_2021-12_ac.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Onsen_in_Nachikatsuura%2C_Japan.jpg">Onsen_in_Nachikatsuura,_Japan.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Sensoji_2023.jpg">Sensoji_2023.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:%E4%B8%8D%E5%BF%8D%E6%B1%A0_-_panoramio.jpg">不忍池_-_panoramio.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Tokyo_Skytree_2014_%E2%85%A2.jpg">Tokyo_Skytree_2014_Ⅲ.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Tendon_of_Dotenoiseya.jpg">Tendon_of_Dotenoiseya.jpg</a></p>
+<p class="credits">사진: 위키미디어 커먼즈(각 파일 페이지의 CC 라이선스 표기에 따름) — <a href="https://commons.wikimedia.org/wiki/File:Keisei_Type3000-3026.jpg">Keisei_Type3000-3026.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Ueno_20241210_133139.jpg">Ueno_20241210_133139.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Asakusa_shrine_2012.JPG">Asakusa_shrine_2012.JPG</a> · <a href="https://commons.wikimedia.org/wiki/File:Day2-2_%2840909714314%29.jpg">Day2-2_(40909714314).jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Kappabashi-dori_streetcorner_%28Kitchen_town_-_southern_end%29_Tokyo_Japan.jpg">Kappabashi-dori_streetcorner_(Kitchen_town_-_southern_end)_Tokyo_Japan.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Monjayaki_Before.JPG">Monjayaki_Before.JPG</a> · <a href="https://commons.wikimedia.org/wiki/File:Asakusa_Nakamise_2021-12_ac.jpg">Asakusa_Nakamise_2021-12_ac.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Onsen_in_Nachikatsuura%2C_Japan.jpg">Onsen_in_Nachikatsuura,_Japan.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Sensoji_2023.jpg">Sensoji_2023.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:%E4%B8%8D%E5%BF%8D%E6%B1%A0_-_panoramio.jpg">不忍池_-_panoramio.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Tokyo_Skytree_2014_%E2%85%A2.jpg">Tokyo_Skytree_2014_Ⅲ.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Tendon_of_Dotenoiseya.jpg">Tendon_of_Dotenoiseya.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Jellyfish_in_Sumida_Aquarium_20180215.jpg">Jellyfish_in_Sumida_Aquarium_20180215.jpg</a></p>
+</section>
+<section class="keep" id="phrases">
+<h2><span class="num">あ</span><span class="jp">一言</span>알아둘 일본어 한마디<span class="tag">왼쪽 한국어 · 오른쪽 일본어 · 그 아래 한글 발음</span></h2>
+<div class="budget-wrap">
+<div>
+<h3>숙소</h3>
+<table class="phr"><tbody>
+<tr><td>예약한 ○○입니다</td><td>予約した○○です<br><small class="note">요야쿠시타 ○○데스</small></td></tr>
+<tr><td>짐 맡겨도 될까요</td><td>荷物を預かってもらえますか<br><small class="note">니모츠오 아즈캇테 모라에마스카</small></td></tr>
+<tr><td>세탁기 어떻게 써요</td><td>洗濯機の使い方を教えてください<br><small class="note">센타쿠키노 츠카이카타오 오시에테 쿠다사이</small></td></tr>
+<tr><td>체크아웃 몇 시예요</td><td>チェックアウトは何時ですか<br><small class="note">첵쿠아우토와 난지데스카</small></td></tr>
+</tbody></table>
+<h3>식당</h3>
+<table class="phr"><tbody>
+<tr><td>추천 메뉴는요</td><td>おすすめは何ですか<br><small class="note">오스스메와 난데스카</small></td></tr>
+<tr><td>포장 되나요</td><td>持ち帰りできますか<br><small class="note">모치카에리 데키마스카</small></td></tr>
+<tr><td>물 좀 주세요</td><td>お水ください<br><small class="note">오미즈 쿠다사이</small></td></tr>
+<tr><td>계산해주세요</td><td>お会計お願いします<br><small class="note">오카이케이 오네가이시마스</small></td></tr>
+<tr><td>(들으면) 몇 분이세요</td><td>何名様ですか<br><small class="note">난메이사마데스카</small></td></tr>
+</tbody></table>
+</div>
+<div>
+<h3>교통</h3>
+<table class="phr"><tbody>
+<tr><td>나리타 공항 가나요</td><td>この電車は成田空港に行きますか<br><small class="note">코노 덴샤와 나리타쿠코니 이키마스카</small></td></tr>
+<tr><td>이 표 맞아요</td><td>この切符で合っていますか<br><small class="note">코노 킷푸데 앗테이마스카</small></td></tr>
+<tr><td>환승 어디서 해요</td><td>どこで乗り換えますか<br><small class="note">도코데 노리카에마스카</small></td></tr>
+</tbody></table>
+<h3>관광(스카이트리·수족관·온천)</h3>
+<table class="phr"><tbody>
+<tr><td>티켓 예매했어요</td><td>チケットを予約しています<br><small class="note">치켓토오 요야쿠시테이마스</small></td></tr>
+<tr><td>사진 찍어도 되나요</td><td>写真を撮ってもいいですか<br><small class="note">샤신오 톳테모 이이데스카</small></td></tr>
+<tr><td>문신 있어도 되나요</td><td>タトゥーがあっても入れますか<br><small class="note">타투가 앗테모 하이레마스카</small></td></tr>
+<tr><td>수건 대여 되나요</td><td>タオルのレンタルはありますか<br><small class="note">타오루노 렌타루와 아리마스카</small></td></tr>
+</tbody></table>
+<h3>쇼핑 · 긴급</h3>
+<table class="phr"><tbody>
+<tr><td>면세 되나요</td><td>免税できますか<br><small class="note">멘제이 데키마스카</small></td></tr>
+<tr><td>카드 되나요</td><td>カード使えますか<br><small class="note">카도 츠카에마스카</small></td></tr>
+<tr><td>도와주세요</td><td>助けてください<br><small class="note">타스케테 쿠다사이</small></td></tr>
+<tr><td>여권을 잃어버렸어요</td><td>パスポートをなくしました<br><small class="note">파스포토오 나쿠시마시타</small></td></tr>
+<tr><td>가까운 병원이 어디예요</td><td>近くの病院はどこですか<br><small class="note">치카쿠노 뵤인와 도코데스카</small></td></tr>
+</tbody></table>
+</div>
+</div>
+
+<h3>미니 퀴즈 <span class="note">(눌러서 정답 확인)</span></h3>
+<div class="planb">
+<details class="pb"><summary><b>Q1. "포장 되나요"는 일본어로?</b></summary><p>① 持ち帰りできますか ② お会計お願いします ③ 免税できますか ④ チェックアウトは何時ですか<br><small class="note">정답 ① 모치카에리 데키마스카</small></p></details>
+<details class="pb"><summary><b>Q2. "면세 되나요"는 일본어로?</b></summary><p>① カード使えますか ② 免税できますか ③ お水ください ④ 助けてください<br><small class="note">정답 ② 멘제이 데키마스카</small></p></details>
+<details class="pb"><summary><b>Q3. "写真を撮ってもいいですか"는 무슨 뜻?</b></summary><p>① 사진 찍어도 되나요 ② 짐 맡겨도 될까요 ③ 환승 어디서 해요 ④ 수건 대여 되나요<br><small class="note">정답 ① 샤신오 톳테모 이이데스카</small></p></details>
+<details class="pb"><summary><b>Q4. "도와주세요"는 일본어로?</b></summary><p>① お会計お願いします ② パスポートをなくしました ③ 助けてください ④ どこで乗り換えますか<br><small class="note">정답 ③ 타스케테 쿠다사이</small></p></details>
+<details class="pb"><summary><b>Q5. "チケットを予約しています"는 무슨 뜻?</b></summary><p>① 예약한 ○○입니다 ② 티켓 예매했어요 ③ 이 표 맞아요 ④ 추천 메뉴는요<br><small class="note">정답 ② 치켓토오 요야쿠시테이마스</small></p></details>
+<details class="pb"><summary><b>Q6. "近くの病院はどこですか"는 무슨 뜻?</b></summary><p>① 나리타 공항 가나요 ② 세탁기 어떻게 써요 ③ 가까운 병원이 어디예요 ④ 체크아웃 몇 시예요<br><small class="note">정답 ③ 치카쿠노 뵤인와 도코데스카</small></p></details>
+</div>
 </section>
 <div class="seigaiha footer-band"></div>
 
