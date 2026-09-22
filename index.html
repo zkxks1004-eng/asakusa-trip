@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>아사쿠사 2박 3일</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
   @page { size: A4; margin: 12mm 13mm 13mm 13mm; }
   :root {
@@ -156,6 +157,25 @@
   }
   /* unfolded Fold / tablet (640~900px): two-column strips stay 4, tables stay tables */
   @media screen and (min-width:641px) and (max-width:900px) { .prep { grid-template-columns:repeat(3,1fr); } }
+
+  /* route map */
+  .mapwrap { display:none; margin:0 0 10px; }
+  @media screen { .mapwrap { display:block; } }
+  .tripmap { height:320px; border-radius:14px; border:1px solid var(--rule-strong); background:#f4f4f6; }
+  @media screen and (max-width:640px) { .tripmap { height:240px; } }
+  .pin { display:flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50% 50% 50% 0; transform:rotate(-45deg); color:#fff; font-size:9.5pt; font-weight:800; box-shadow:0 1px 3px rgba(0,0,0,.3), inset 0 0 0 2px #fff; }
+  .pin span { transform:rotate(45deg); }
+  .leaflet-popup-content { font-family:"Pretendard","Apple SD Gothic Neo",sans-serif; font-size:9.2pt; }
+  .leaflet-popup-content b { display:block; margin-bottom:2px; }
+  .all-route { display:inline-flex; align-items:center; gap:6px; margin:8px 0 4px; background:var(--red-tint); color:var(--red); border-radius:999px; padding:7px 14px; font-weight:700; font-size:9pt; }
+  .legs { margin:4px 0 0; border-top:1px solid var(--rule); }
+  .leg { display:flex; align-items:center; gap:8px; padding:7px 2px; border-bottom:1px solid var(--rule); font-size:8.9pt; }
+  .leg .n { width:19px; height:19px; border-radius:50%; background:var(--indigo); color:#fff; font-size:7.8pt; font-weight:800; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .leg .route { flex:1; min-width:0; }
+  .leg .route b { font-weight:600; }
+  .leg .mode { color:var(--muted); font-size:8.2pt; white-space:nowrap; }
+  .leg a.go { flex:0 0 auto; background:var(--sky-tint); color:var(--sky); border-radius:999px; padding:4px 10px; font-weight:700; font-size:8.4pt; white-space:nowrap; }
+  @media print { .mapwrap { display:none; } }
 </style>
 </head>
 <body>
@@ -224,6 +244,11 @@
   <figure><img loading="lazy" src="img/skytree.jpg" alt=""><figcaption><b>도쿄 스카이트리</b> 634m, 일몰 17:33에 맞춰 입장</figcaption></figure>
 </div>
 <div class="legend"><span class="move">이동</span><span class="spot">명소</span><span class="eat">식사</span><span class="onsen">온천</span><span class="net">통신</span></div>
+<div class="mapwrap">
+  <div id="map-day1" class="tripmap"></div>
+  <a class="all-route" id="all-route-day1" target="_blank" rel="noopener">🧭 1일차 전체 경로 한번에 길찾기 (도보)</a>
+  <div class="legs" id="legs-day1"></div>
+</div>
 <table class="tl">
 <thead><tr><th>시간</th><th style="width:44%">일정</th><th>차선책</th></tr></thead>
 <tbody>
@@ -234,7 +259,7 @@
 <tr class="move"><td class="time">11:15</td><td class="what"><b>케이세이 액세스 특급 승차</b><small>행선지 "羽田空港"·"西馬込"·"泉岳寺" 표시가 아사쿠사 직통. 약 40분 간격. 스카이라이너와 같은 승강장 방향이니 전광판 "アクセス特急" 확인</small></td><td class="alt">놓쳤으면 스카이라이너(41분, 지정석) → 케이세이 우에노 → 긴자선 3정거장. 요금 2배, 30분 단축</td></tr>
 <tr class="move"><td class="time">12:20</td><td class="what"><b>아사쿠사역 도착</b><small>A4 출구가 카미나리몬 바로 앞. 엘리베이터는 A2b</small></td><td class="alt none"></td></tr>
 <tr class="move"><td class="time">12:35</td><td class="what"><b>숙소에 짐 맡기기</b><small>체크인 15:00. 캐리어만 맡기고 작은 가방으로</small></td><td class="alt">숙소가 짐을 안 받으면 아사쿠사역 코인로커(대형 700엔) 또는 아사쿠사 문화관광센터 지하 로커</td></tr>
-<tr class="eat"><td class="time">12:50</td><td class="what"><b>다이코쿠야 텐동 본점</b><small>浅草1-38-10 · 11:10~20:30. 에비텐동(새우 4마리) 또는 텐동(새우·키스·카키아게). 현금 준비</small></td><td class="alt">줄이 40분 넘으면 골목 안 별관(같은 메뉴, 대기 짧음). 그것도 길면 아사쿠사 멘치(200엔대) + 나카미세 간식</td></tr>
+<tr class="eat"><td class="time">12:50</td><td class="what"><b>다이코쿠야 텐동 본점</b><small>浅草1-38-10 · 11:10~20:30. 추천은 새우 2마리 텐동(에비텐동) — 새우튀김 2개+키스튀김+가키아게가 밥이 안 보일 만큼 얹힘. 에도마에식이라 튀김을 다레에 한 번 담갔다 얹어 색이 진하고 눅눅한 편(호불호 있음, 바삭함보다 다레맛 위주). 현금 준비</small></td><td class="alt">줄이 40분 넘으면 골목 안 별관(같은 메뉴, 대기 짧음). 그것도 길면 아사쿠사 멘치(200엔대) + 나카미세 간식</td></tr>
 <tr class="spot"><td class="time">13:45</td><td class="what"><b>카미나리몬 → 나카미세도리</b><small>초롱 밑면의 용 조각 확인. 250m 상점가, 간식은 산 자리에서 먹기(걸으며 먹지 않기)</small></td><td class="alt none"></td></tr>
 <tr class="spot"><td class="time">14:10</td><td class="what"><b>호조몬 → 본당 참배 → 오미쿠지</b><small>본당 06:00~17:00. 향로 연기 쐬기 → 손 씻기 → 새전 → 두 번 절·박수 없이 합장(절이라 박수 안 함). 오미쿠지 100엔, 흉이 나오면 옆 철봉에 묶고 감</small></td><td class="alt">비가 오면 본당·호조몬 처마 아래로 짧게, 나머지는 밤 산책으로</td></tr>
 <tr class="spot"><td class="time">14:35</td><td class="what"><b>아사쿠사 신사 · 본당 뒤편</b><small>본당 오른쪽 옆. 관광객이 확 줄어드는 구역. 오층탑 사진은 본당 서쪽 정원에서</small></td><td class="alt none"></td></tr>
@@ -245,7 +270,7 @@
 <tr class="spot"><td class="time">17:00</td><td class="what"><b>텐보데크 350m</b><small>일몰 17:33. 서쪽(후지산 방향) 창가에 16:55까지 자리. 350m 층 카페에서 음료 들고 창가 스탠딩 가능</small></td><td class="alt">창가를 못 잡으면 18:00 이후 야경 시간대가 오히려 한산. 회랑(450m)은 추가 요금이라 생략</td></tr>
 <tr class="spot"><td class="time">18:20</td><td class="what"><b>하강 → 소라마치 1·2층 기념품</b><small>도쿄 바나나·시로이 코이비토·로이스 등 정석 선물. 스카이트리 한정 패키지는 여기만</small></td><td class="alt none"></td></tr>
 <tr class="move"><td class="time">19:15</td><td class="what"><b>아사쿠사로 도보 복귀</b><small>아즈마바시 경유 20분. 스카이트리 조명이 켜진 강변을 보며 걷는 코스</small></td><td class="alt">시간이 빠듯하면 오시아게역 → 아사쿠사역 아사쿠사선 1정거장(5분)</td></tr>
-<tr class="eat"><td class="time">19:45</td><td class="what"><b>몬자야키 가게 도착</b><small>20:00, 코시로가 예약. <a href="https://www.google.com/maps/place/%EC%93%B0%ED%82%A4%EC%8B%9C%EB%A7%88%EB%AA%AC%EC%9E%90+%EA%B3%A0%EB%B3%B4%EB%A0%88%EC%95%BC+%EC%95%84%EC%82%AC%EC%BF%A0%EC%82%AC/@35.7121648,139.7946345,16z" target="_blank" rel="noopener">츠키시마몬자 고보레야 아사쿠사점</a> — 아사쿠사 안이라 스카이트리에서 도보 복귀 동선 그대로 적용. 명란 떡 치즈 몬자가 입문용. 철판에 둑을 만들고 국물을 붓는 건 점원에게 부탁하면 해 줌</small></td><td class="alt none"></td></tr>
+<tr class="eat"><td class="time">19:45</td><td class="what"><b>몬자야키 가게 도착</b><small>20:00, 코시로가 예약. <a href="https://www.google.com/maps/place/%EC%93%B0%ED%82%A4%EC%8B%9C%EB%A7%88%EB%AA%AC%EC%9E%90+%EA%B3%A0%EB%B3%B4%EB%A0%88%EC%95%BC+%EC%95%84%EC%82%AC%EC%BF%A0%EC%82%AC/@35.7121648,139.7946345,16z" target="_blank" rel="noopener">츠키시마몬자 고보레야 아사쿠사점</a>(浅草1-28-1) — 아사쿠사 안이라 스카이트리에서 도보 복귀 동선 그대로 적용. 월島 몬자 전문점의 아사쿠사 지점, 하카타 명란·야마가타규 등 산지 재료 사용. 가게 1등 인기메뉴는 "명란떡"(明太餅 — 최고급 하카타 명란에 떡을 곁들임). 핫페퍼 평점 4.1(103건). 철판에 둑을 만들고 국물을 붓는 건 점원이 직접 해 줌</small></td><td class="alt none"></td></tr>
 <tr class="spot"><td class="time">21:30</td><td class="what"><b>센소지 야간 산책</b><small>조명 일몰~23:00. 카미나리몬 → 나카미세(셔터 벽화) → 호조몬 → 오층탑. 30분이면 충분</small></td><td class="alt none"></td></tr>
 <tr class="onsen"><td class="time">22:00</td><td class="what"><b>아사쿠사 ROX 마츠리유</b><small>ROX 빌딩 7층, 센소지에서 5분. 월~토 10:30~다음날 09:00. 옥상 노천탕에서 스카이트리가 보임. 수건·실내복 포함</small></td><td class="alt">너무 늦었으면 3일차 07:40에 가도 됨(대욕장 08:00까지). 천연온천이 좋으면 사카에유(온천 항목)</td></tr>
 <tr class="move"><td class="time">23:30</td><td class="what"><b>숙소 복귀</b><small>3일차 07:00 기상 알람</small></td><td class="alt none"></td></tr>
@@ -262,20 +287,24 @@
   <figure><img loading="lazy" src="img/ameyoko.jpg" alt=""><figcaption><b>아메요코</b> 우에노~오카치마치 고가 아래 400여 점포</figcaption></figure>
 </div>
 <div class="legend"><span class="move">이동</span><span class="spot">명소</span><span class="eat">식사</span><span class="onsen">온천</span></div>
+<div class="mapwrap">
+  <div id="map-day3" class="tripmap"></div>
+  <div class="legs" id="legs-day3"></div>
+</div>
 <table class="tl">
 <thead><tr><th>시간</th><th style="width:44%">일정</th><th>차선책</th></tr></thead>
 <tbody>
 <tr class="spot"><td class="time">07:00</td><td class="what"><b>센소지 이른 아침</b><small>본당 06:00 개방. 사진에 사람이 안 들어오는 유일한 시간. 본당 앞 → 오층탑 → 아사쿠사 신사 순</small></td><td class="alt">늦잠이면 이 블록만 빼고 08:45 페리칸부터</td></tr>
 <tr class="spot"><td class="time">07:40</td><td class="what"><b>나카미세 셔터 벽화 → 카미나리몬</b><small>가게가 열기 전 셔터에 그려진 아사쿠사 사계절 그림. 카미나리몬 정면 사진도 이 시간이 제일 깨끗</small></td><td class="alt none"></td></tr>
 <tr class="move"><td class="time">08:15</td><td class="what"><b>숙소 복귀 · 짐 정리</b><small>칼·액체·과자는 캐리어(위탁)로</small></td><td class="alt none"></td></tr>
-<tr class="eat"><td class="time">08:45</td><td class="what"><b>페리칸 카페 줄 서기</b><small>寿3-9-11 · 09:00~17:00, 수·일 휴무(토요일 영업). 오픈 전부터 줄. 숙소에서 도보 10분 안팎</small></td><td class="alt">줄이 30분 넘으면 옆 페리칸 빵집에서 식빵만 사서 숙소·공원에서. 또는 카미나리몬 근처 커피 노포</td></tr>
-<tr class="eat"><td class="time">09:00</td><td class="what"><b>토스트 · 프루트 샌드 아침</b><small>탄 자국 난 두꺼운 토스트가 대표. 30분</small></td><td class="alt none"></td></tr>
+<tr class="eat"><td class="time">08:45</td><td class="what"><b>페리칸 카페 줄 서기</b><small>寿3-9-11 · 09:00~17:00, 수·일 휴무(토요일 영업). 1942년 창업 노포 빵집 "팡노페리칸"의 식빵을 쓰는 카페. 오픈 전부터 줄. 숙소에서 도보 10분 안팎</small></td><td class="alt">줄이 30분 넘으면 옆 페리칸 빵집에서 식빵만 사서 숙소·공원에서. 또는 카미나리몬 근처 커피 노포</td></tr>
+<tr class="eat"><td class="time">09:00</td><td class="what"><b>토스트 · 프루트 샌드 아침</b><small>추천은 치즈 토스트(모짜렐라·프로마주블랑·파르미지아노 3종). 겉은 바삭, 속은 결이 촘촘하고 폭신. 프루트 샌드도 인기. 30분</small></td><td class="alt none"></td></tr>
 <tr class="move"><td class="time">09:40</td><td class="what"><b>체크아웃 · 짐 맡기기</b><small>15:35에 찾는다고 말해 두기</small></td><td class="alt none"></td></tr>
 <tr class="move"><td class="time">10:00</td><td class="what"><b>갓파바시 도구거리로 도보</b><small>아사쿠사에서 15분. 국제거리 건너 서쪽</small></td><td class="alt none"></td></tr>
 <tr class="spot"><td class="time">10:15</td><td class="what"><b>갓파바시 도구거리</b><small>대부분 10:00~17:00, 토요일 90% 영업. 남쪽 끝 니이미(요리사 머리)에서 북쪽으로 800m. 식품 모형 키링, 그릇, 칼(카마아사 등)</small></td><td class="alt">비 오면 소라마치 실내 쇼핑, 또는 우에노 국립과학박물관·도쿄국립박물관(09:30 개관)</td></tr>
 <tr class="move"><td class="time">11:20</td><td class="what"><b>타와라마치역 → 긴자선 우에노</b><small>3정거장, 10분. 시부야 방면</small></td><td class="alt none"></td></tr>
 <tr class="spot"><td class="time">11:40</td><td class="what"><b>우에노 공원 · 시노바즈 연못</b><small>40분 한 바퀴. 연꽃은 끝물이지만 연잎 풍경과 벤텐도는 볼 만함</small></td><td class="alt none"></td></tr>
-<tr class="eat"><td class="time">12:20</td><td class="what"><b>점심 · 이센 본점 또는 호라이야</b><small>둘 다 1930년 창업. 이센은 카츠산도 원조(포장 가능, 기내 간식으로도), 호라이야는 히레카츠. 12시 넘으면 줄</small></td><td class="alt">둘 다 길면 톤하치테이(1947년). 그것도 길면 아메요코 안 해산물 덮밥</td></tr>
+<tr class="eat"><td class="time">12:20</td><td class="what"><b>점심 · 이센 본점 또는 호라이야</b><small>둘 다 1930년 창업. 이센은 일본 최초로 카츠산도를 고안한 원조집 — 히레카츠·식빵·소스 밸런스가 명물(포장 가능, 기내 간식으로도). 타베로그 "돈카츠 백명점" 선정. 호라이야는 젓가락으로 잘리는 부드러운 히레카츠. 12시 넘으면 줄</small></td><td class="alt">둘 다 길면 톤하치테이(1947년). 그것도 길면 아메요코 안 해산물 덮밥</td></tr>
 <tr class="spot"><td class="time">13:30</td><td class="what"><b>아메요코 시장</b><small>대부분 10:00~20:00. 과자 도매 니키노카시, 건어물, 컷 과일, 화장품·운동화 할인. 묶음 판매가 기본이라 흥정은 안 통함</small></td><td class="alt">사람에 지치면 야나카 긴자(닛포리 1정거장) 옛 골목. 단 15:00엔 출발해야 함</td></tr>
 <tr class="move"><td class="time">14:30</td><td class="what"><b>우에노역 → 긴자선 아사쿠사</b><small>15분. 종점이라 못 지나침</small></td><td class="alt none"></td></tr>
 <tr class="spot"><td class="time">14:50</td><td class="what"><b>나카미세 마지막 쇼핑 · 돈키호테 아사쿠사점</b><small>면세는 여권 지참. 액체류 100ml 초과는 위탁</small></td><td class="alt">온천을 아직 못 갔으면 쇼핑 대신 14:00 사카에유(택시 10분) → 15:20 숙소 복귀</td></tr>
@@ -324,7 +353,7 @@
   <div class="g"><img loading="lazy" src="img/sensoji.jpg" alt=""><div><b>센소지 · 카미나리몬</b><span class="why">도쿄에서 가장 오래된 절, 628년</span><p>빨간 대형 초롱의 카미나리몬이 상징. 본당 앞 향로 연기를 몸에 쐬면 액운을 막는다는 풍습. 오미쿠지는 흉이 유독 많이 나오기로 유명해서 그 자체가 재미.</p></div></div>
   <div class="g"><img loading="lazy" src="img/nakamise.jpg" alt=""><div><b>나카미세도리 간식</b><span class="why">에도 시대부터 이어진 참배길 상점가</span><p>아게만주(튀김 만주, 코코노에), 키비단고(아즈마, 매장 앞 실연), 닌교야키(키무라야 본점). 사서 그 자리에서 먹는 게 매너.</p></div></div>
   <div class="g"><img loading="lazy" src="img/tendon.jpg" alt=""><div><b>다이코쿠야 텐동</b><span class="why">1887년 창업, 검은 텐동</span><p>참기름에 튀겨 진한 간장 타레를 끼얹는 아사쿠사식. 겉이 까맣고 달짝지근함. 에비텐동이 대표, 현금만 받는 경우가 있어 준비.</p></div></div>
-  <div class="g"><img loading="lazy" src="img/monja.jpg" alt=""><div><b>몬자야키</b><span class="why">도쿄 시타마치의 소울푸드</span><p>오코노미야키보다 반죽이 묽어 철판에 펼쳐 익히고 작은 주걱으로 긁어 먹음. 명란 떡 치즈 조합이 입문용. 사진은 굽기 전 재료 상태.</p></div></div>
+  <div class="g"><img loading="lazy" src="img/monja.jpg" alt=""><div><b>몬자야키 · 고보레야</b><span class="why">도쿄 시타마치의 소울푸드</span><p>오코노미야키보다 반죽이 묽어 철판에 펼쳐 익히고 작은 주걱으로 긁어 먹음. 예약한 고보레야 아사쿠사점의 1등 메뉴는 "명란떡"(하카타 명란+떡). 평점 4.1/103건. 사진은 굽기 전 재료 상태.</p></div></div>
   <div class="g"><img loading="lazy" src="img/skytree.jpg" alt=""><div><b>도쿄 스카이트리</b><span class="why">634m, 일본 최고 높이 구조물</span><p>텐보데크 350m가 기본, 회랑 450m는 추가 요금. 일몰 30분 전 입장이 최적. 예매 없이 가면 비싸고 줄이 김.</p></div></div>
   <div class="g"><img loading="lazy" src="img/aquarium.jpg" alt=""><div><b>스미다 수족관</b><span class="why">소라마치 5~6층, 날씨 영향 없는 실내</span><p>도넛형 해파리 수조와 펭귄 전시가 대표. 평일 10:00~20:00(최종입장 19:00), 대인 2,700엔. 스카이트리 바로 옆이라 일몰 전 시간 채우기 좋음.</p></div></div>
   <div class="g"><img loading="lazy" src="img/kappabashi.jpg" alt=""><div><b>갓파바시 도구거리</b><span class="why">요리 도구 전문 상점가 800m</span><p>식당용 칼·그릇·냄비를 소매로. 식품 모형 키링이 기념품으로 인기. 칼은 반드시 위탁수하물.</p></div></div>
@@ -377,9 +406,10 @@
 <ul class="sources">
   <li><a href="https://www.keisei.co.jp/keisei/tetudou/skyliner/jp/traffic/">케이세이 나리타 공항 액세스 가이드</a> · <a href="https://www.navitime.co.jp/diagram/depArrTimeList?departure=00004637&arrival=00005270&line=00000852&updown=0">나리타→아사쿠사 시각표(NAVITIME)</a></li>
   <li><a href="https://www.tokyo-skytree.jp/open-hours/">스카이트리 영업시간</a> · <a href="https://www.tokyo-skytree.jp/ticket/">스카이트리 요금</a> · <a href="https://www.senso-ji.jp/visit/">센소지 참배 안내</a></li>
-  <li><a href="http://www.tempura.co.jp/access.html">다이코쿠야 텐푸라</a> · <a href="https://asakusa.pelicancafe.jp/">페리칸 카페 아사쿠사점</a> · <a href="https://rurubu.jp/andmore/article/20254">나카미세 먹거리(루루부)</a></li>
+  <li><a href="http://www.tempura.co.jp/access.html">다이코쿠야 텐푸라</a> · <a href="https://oisiiskytree.com/asakusa-daikokuya/">다이코쿠야 리뷰·행렬 후기</a> · <a href="https://asakusa.pelicancafe.jp/">페리칸 카페 아사쿠사점</a> · <a href="https://asakusa.pelicancafe.jp/menu.html">페리칸 카페 메뉴</a> · <a href="https://rurubu.jp/andmore/article/20254">나카미세 먹거리(루루부)</a></li>
   <li><a href="https://www.matsuri-yu.com/en/charge/">아사쿠사 ROX 마츠리유</a> · <a href="https://www.sakaeyu.net/information/">유돈부리 사카에유 영업 안내</a></li>
-  <li><a href="https://www.kappabashi.or.jp/en/qa/">갓파바시 도구거리</a> · <a href="https://www.ameyoko.net/">아메요코 공식</a> · <a href="https://serai.jp/gourmet/1146563">우에노 돈카츠 노포</a></li>
+  <li><a href="https://www.kappabashi.or.jp/en/qa/">갓파바시 도구거리</a> · <a href="https://www.ameyoko.net/">아메요코 공식</a> · <a href="https://serai.jp/gourmet/1146563">우에노 돈카츠 노포</a> · <a href="https://san-tatsu.jp/articles/168665/">이센 본점 카츠산도 소개</a></li>
+  <li><a href="https://tsukishima-monja-koboreya.com/menu.html">츠키시마몬자 고보레야 메뉴</a> · <a href="https://www.hotpepper.jp/strJ004049970/">고보레야 아사쿠사점 평점·리뷰</a></li>
   <li><a href="https://www.sumida-aquarium.com/">스미다 수족관 공식(영업시간·요금)</a> · <a href="https://hoteltavinos.com/en/asakusa/">호텔 타비노스 아사쿠사 공식</a></li>
 </ul>
 <p class="credits">사진: 위키미디어 커먼즈(각 파일 페이지의 CC 라이선스 표기에 따름) — <a href="https://commons.wikimedia.org/wiki/File:Keisei_Type3000-3026.jpg">Keisei_Type3000-3026.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Ueno_20241210_133139.jpg">Ueno_20241210_133139.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Asakusa_shrine_2012.JPG">Asakusa_shrine_2012.JPG</a> · <a href="https://commons.wikimedia.org/wiki/File:Day2-2_%2840909714314%29.jpg">Day2-2_(40909714314).jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Kappabashi-dori_streetcorner_%28Kitchen_town_-_southern_end%29_Tokyo_Japan.jpg">Kappabashi-dori_streetcorner_(Kitchen_town_-_southern_end)_Tokyo_Japan.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Monjayaki_Before.JPG">Monjayaki_Before.JPG</a> · <a href="https://commons.wikimedia.org/wiki/File:Asakusa_Nakamise_2021-12_ac.jpg">Asakusa_Nakamise_2021-12_ac.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Onsen_in_Nachikatsuura%2C_Japan.jpg">Onsen_in_Nachikatsuura,_Japan.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Sensoji_2023.jpg">Sensoji_2023.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:%E4%B8%8D%E5%BF%8D%E6%B1%A0_-_panoramio.jpg">不忍池_-_panoramio.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Tokyo_Skytree_2014_%E2%85%A2.jpg">Tokyo_Skytree_2014_Ⅲ.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Tendon_of_Dotenoiseya.jpg">Tendon_of_Dotenoiseya.jpg</a> · <a href="https://commons.wikimedia.org/wiki/File:Jellyfish_in_Sumida_Aquarium_20180215.jpg">Jellyfish_in_Sumida_Aquarium_20180215.jpg</a></p>
@@ -442,5 +472,119 @@
 <div class="seigaiha footer-band"></div>
 
 </div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  var COLOR = { spot:"#2b5a8c", eat:"#b7541f", onsen:"#8b3a62", move:"#22436b" };
+  var MODE_LABEL = { walk:"🚶 도보", transit:"🚇 지하철" };
+
+  var day1 = [
+    {t:"12:20", n:"아사쿠사역 도착",        cat:"move",  lat:35.7113505, lng:139.7983284, mode:"walk"},
+    {t:"12:50", n:"다이코쿠야 텐동",        cat:"eat",   lat:35.7127560, lng:139.7955770, mode:"walk"},
+    {t:"13:45", n:"카미나리몬·센소지",      cat:"spot",  lat:35.7134032, lng:139.7955265, mode:"walk"},
+    {t:"14:35", n:"아사쿠사 신사",          cat:"spot",  lat:35.7148087, lng:139.7974977, mode:"walk"},
+    {t:"15:00", n:"호텔 타비노스 체크인",   cat:"move",  lat:35.7163297, lng:139.7930143, mode:"walk"},
+    {t:"15:40", n:"스미다공원·아즈마바시",  cat:"spot",  lat:35.7101071, lng:139.7989311, mode:"walk"},
+    {t:"16:00", n:"스미다 수족관",          cat:"spot",  lat:35.7101011, lng:139.8093338, mode:"walk"},
+    {t:"16:45", n:"도쿄 스카이트리",        cat:"spot",  lat:35.7100543, lng:139.8107141, mode:"walk"},
+    {t:"19:45", n:"몬자야키 고보레야",      cat:"eat",   lat:35.7121648, lng:139.7946345, mode:"walk"},
+    {t:"21:30", n:"센소지 야간 산책",       cat:"spot",  lat:35.7134032, lng:139.7955265, mode:"walk"},
+    {t:"22:00", n:"ROX 마츠리유 온천",      cat:"onsen", lat:35.7129859, lng:139.7927969}
+  ];
+
+  var day3 = [
+    {t:"07:00", n:"센소지 이른 아침",         cat:"spot", lat:35.7134032, lng:139.7955265, mode:"walk"},
+    {t:"08:15", n:"숙소 복귀",                cat:"move", lat:35.7163297, lng:139.7930143, mode:"walk"},
+    {t:"08:45", n:"페리칸 카페",              cat:"eat",  lat:35.7084933, lng:139.7913510, mode:"walk"},
+    {t:"10:15", n:"갓파바시 도구거리",        cat:"spot", lat:35.7147228, lng:139.7891442, mode:"walk"},
+    {t:"11:20", n:"타와라마치역",             cat:"move", lat:35.7098357, lng:139.7907549, mode:"transit"},
+    {t:"11:40", n:"우에노공원·시노바즈연못",  cat:"spot", lat:35.7140191, lng:139.7739291, mode:"walk"},
+    {t:"12:20", n:"이센·호라이야 점심",       cat:"eat",  lat:35.7074158, lng:139.7737581, mode:"walk"},
+    {t:"13:30", n:"아메요코 시장",            cat:"spot", lat:35.7100241, lng:139.7745414, mode:"walk"},
+    {t:"14:30", n:"우에노역",                 cat:"move", lat:35.7140413, lng:139.7771164, mode:"transit"},
+    {t:"14:50", n:"나카미세·돈키호테",        cat:"spot", lat:35.7134032, lng:139.7955265, mode:"walk"},
+    {t:"15:35", n:"숙소 짐찾기",              cat:"move", lat:35.7163297, lng:139.7930143, mode:"walk"},
+    {t:"15:50", n:"아사쿠사역→나리타",        cat:"move", lat:35.7113505, lng:139.7983284}
+  ];
+
+  function pinIcon(cat, num){
+    return L.divIcon({
+      className:"", html:'<div class="pin" style="background:'+COLOR[cat]+'"><span>'+num+'</span></div>',
+      iconSize:[22,22], iconAnchor:[11,22], popupAnchor:[0,-20]
+    });
+  }
+
+  function sameSpot(a,b){ return Math.abs(a.lat-b.lat) < 0.0002 && Math.abs(a.lng-b.lng) < 0.0002; }
+
+  function gmapsDir(o, d, waypoints, mode){
+    var url = "https://www.google.com/maps/dir/?api=1&origin="+o.lat+","+o.lng+"&destination="+d.lat+","+d.lng+"&travelmode="+(mode||"walking");
+    if (waypoints && waypoints.length){
+      url += "&waypoints="+encodeURIComponent(waypoints.map(function(w){ return w.lat+","+w.lng; }).join("|"));
+    }
+    return url;
+  }
+
+  function buildDay(mapId, legsId, stops, allRouteId){
+    var mapEl = document.getElementById(mapId);
+    if (!mapEl || !window.L) return;
+    var map = L.map(mapId, { scrollWheelZoom:false });
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>', maxZoom:19
+    }).addTo(map);
+
+    var latlngs = stops.map(function(s){ return [s.lat, s.lng]; });
+    L.polyline(latlngs, { color:"#6e6e73", weight:3, dashArray:"6 6", opacity:.8 }).addTo(map);
+    stops.forEach(function(s, i){
+      L.marker([s.lat, s.lng], { icon:pinIcon(s.cat, i+1) }).addTo(map)
+        .bindPopup("<b>"+(i+1)+". "+s.n+"</b>"+s.t);
+    });
+    var bounds = L.latLngBounds(latlngs);
+    map.__fitBounds = bounds;
+    map.fitBounds(bounds, { padding:[24,24] });
+    setTimeout(function(){ map.invalidateSize(); map.fitBounds(bounds, { padding:[24,24] }); }, 200);
+
+    var legsEl = document.getElementById(legsId);
+    if (legsEl){
+      var html = "";
+      for (var i=0; i<stops.length-1; i++){
+        var a = stops[i], b = stops[i+1];
+        if (sameSpot(a,b)) continue;
+        var mode = a.mode === "transit" ? "transit" : "walking";
+        var link = gmapsDir(a, b, null, mode);
+        html += '<div class="leg"><span class="n">'+(i+1)+'</span><span class="route"><b>'+a.n+'</b> → '+b.n+'</span>'
+          + '<span class="mode">'+MODE_LABEL[a.mode==="transit"?"transit":"walk"]+'</span>'
+          + '<a class="go" href="'+link+'" target="_blank" rel="noopener">길찾기</a></div>';
+      }
+      legsEl.innerHTML = html;
+    }
+
+    if (allRouteId){
+      var allEl = document.getElementById(allRouteId);
+      if (allEl){
+        var mid = stops.slice(1, -1);
+        allEl.href = gmapsDir(stops[0], stops[stops.length-1], mid, "walking");
+      }
+    }
+    return map;
+  }
+
+  window.tripMaps = {
+    day1: buildDay("map-day1", "legs-day1", day1, "all-route-day1"),
+    day3: buildDay("map-day3", "legs-day3", day3, null)
+  };
+
+  var resizeTimer;
+  window.addEventListener("resize", function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){
+      Object.keys(window.tripMaps).forEach(function(k){
+        var m = window.tripMaps[k];
+        m.invalidateSize();
+        if (m.__fitBounds) m.fitBounds(m.__fitBounds, { padding:[24,24] });
+      });
+    }, 150);
+  });
+})();
+</script>
 </body>
 </html>
