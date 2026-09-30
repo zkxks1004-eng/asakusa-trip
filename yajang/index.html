@@ -6,7 +6,7 @@
 <title>을지로·익선동 야장 리스트</title>
 <meta name="description" content="을지로·익선동·종로3가·서순라길 야장 맛집 13곳 — 추천 메뉴, 가격, 웨이팅 팁. 친구들이랑 골라요!">
 <meta property="og:title" content="을지로·익선동 야장 리스트 🍺">
-<meta property="og:description" content="야장 맛집 13곳 — 추천 메뉴·가격·웨이팅 팁. 가고 싶은 곳 찜해서 단톡방에 보내줘!">
+<meta property="og:description" content="야장 맛집 13곳 — 추천 메뉴·가격·웨이팅 팁. 가고 싶은 곳 콜 해서 단톡방에 보내!">
 <meta property="og:image" content="https://commons.wikimedia.org/wiki/Special:FilePath/Ikseon-dong_%EC%9D%B5%EC%84%A0%EB%8F%99_October_1_2020_3.jpg?width=1200">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
@@ -74,8 +74,9 @@
   .ph .emoji { position:absolute; inset:0; display:grid; place-items:center; font-size:64px; }
   .ph img + .emoji { display:none; }
   .ph .cap { position:absolute; left:8px; bottom:8px; background:rgba(0,0,0,.55); color:#fff; font-size:11px; padding:2px 8px; border-radius:999px; }
-  .ph .heart { position:absolute; right:10px; top:10px; width:42px; height:42px; border-radius:50%; border:none; cursor:pointer;
-    background:rgba(255,255,255,.92); font-size:20px; display:grid; place-items:center; box-shadow:0 2px 6px rgba(0,0,0,.2); }
+  .ph .heart { position:absolute; right:10px; top:10px; height:38px; padding:0 14px; border-radius:999px; border:none; cursor:pointer;
+    background:rgba(255,255,255,.92); color:#1d1d1f; font:inherit; font-size:14px; font-weight:800; box-shadow:0 2px 6px rgba(0,0,0,.2); }
+  .ph .heart[aria-pressed="true"] { background:var(--accent); color:#fff; }
   .body { padding:14px 16px 16px; display:flex; flex-direction:column; gap:8px; flex:1; }
   .top { display:flex; justify-content:space-between; gap:8px; align-items:flex-start; }
   .name { font-size:18px; font-weight:800; margin:0; letter-spacing:-.02em; }
@@ -135,13 +136,13 @@
     <div class="txt">
       <p class="k">🍺 을지로 · 익선동 · 종로3가 · 서순라길</p>
       <h1>야장 맛집 리스트</h1>
-      <p>13곳 모아봤어. 가고 싶은 곳 ♡ 누르고 단톡방에 공유해줘!</p>
+      <p>13곳 모아봤어. 가고 싶은 곳 “콜” 누르고 단톡방에 공유!</p>
     </div>
   </header>
 
   <section class="how" aria-label="사용법">
     <div><b>① 둘러보기</b>동네·분위기 필터로 골라보기</div>
-    <div><b>② 찜하기 ♡</b>사진 오른쪽 위 하트 누르기</div>
+    <div><b>② 콜 🍺</b>사진 오른쪽 위 “콜” 버튼 누르기</div>
     <div><b>③ 공유</b>아래 바에서 “복사”→ 단톡방에 붙여넣기</div>
   </section>
 
@@ -310,7 +311,7 @@ function card(p) {
   return `<article class="card${on ? " picked" : ""}" data-id="${p.id}">
     <div class="ph">${img}<div class="emoji" aria-hidden="true">${p.emoji}</div>
       ${p.img ? `<span class="cap">${esc(p.cap)}</span>` : ""}
-      <button class="heart" data-pick="${p.id}" aria-pressed="${on}" aria-label="${esc(p.name)} 찜하기">${on ? "❤️" : "🤍"}</button>
+      <button class="heart" data-pick="${p.id}" aria-pressed="${on}" aria-label="${esc(p.name)} 콜">${on ? "✅ 콜!" : "🍺 콜"}</button>
     </div>
     <div class="body">
       <div class="top"><h3 class="name">${p.emoji} ${esc(p.name)}</h3><span class="price">${esc(p.price)}</span></div>
@@ -338,14 +339,14 @@ function render() {
     return `<section class="area"><h2>${a.name} <small>${a.sub}</small></h2><p>${a.desc}</p><div class="grid">${ps.map(card).join("")}</div></section>`;
   }).join("");
   $("#list").innerHTML = html || `<p class="empty">조건에 맞는 곳이 없어요. 필터를 바꿔보세요.</p>`;
-  $("#count").textContent = `${n}곳 보는 중` + (picked.length ? ` · ❤️ ${picked.length}곳 찜` : "");
+  $("#count").textContent = `${n}곳 보는 중` + (picked.length ? ` · 🍺 ${picked.length}곳 콜` : "");
   tray();
 }
 
 function tray() {
   const names = picked.map(id => PLACES.find(p => p.id === id)).filter(Boolean).map(p => p.name);
   $("#tray").hidden = !names.length;
-  $("#trayList").textContent = `❤️ ${names.length}곳: ${names.join(", ")}`;
+  $("#trayList").textContent = `🍺 콜 ${names.length}곳: ${names.join(", ")}`;
 }
 
 function save() { try { localStorage.setItem("yajang-picked", JSON.stringify(picked)); } catch (e) {} }
